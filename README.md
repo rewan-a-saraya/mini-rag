@@ -14,4 +14,8 @@ This is a minimal implementation of the RAG model for question answering
    $ conda create -n mini-rag python=3.8
    ```
 4) Activate the environment :
-   conda activate mini-rag
+   ```bash
+   $ conda activate mini-rag
+   ```
+
+   
