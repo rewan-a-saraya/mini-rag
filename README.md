@@ -11,11 +11,25 @@ This is a minimal implementation of the RAG model for question answering
 1) Install Miniconda from : ([https://www.anaconda.com/docs/getting-started/miniconda/main](https://www.anaconda.com/download/success))
 2) Create a new environment using :
    ```bash
-   $ conda create -n mini-rag python=3.8
+   $  conda create -n mini-rag python=3.8
    ```
 4) Activate the environment :
    ```bash
-   $ conda activate mini-rag
+   $  conda activate mini-rag
    ```
 
-   
+## Installation
+
+### Install the required packages
+
+```bash
+   $  pip install -r requirements.txt
+   ```
+
+### Setup the environment variables
+
+```bash 
+   $  cp .env.example .env
+```
+
+Set your environment variables in the .env file. Like OPENAI_API_KEY value.
