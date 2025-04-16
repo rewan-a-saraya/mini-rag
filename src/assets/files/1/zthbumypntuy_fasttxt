@@ -1,0 +1,58 @@
+FastAPI – Introduction
+Last Updated : 29 Sep, 2023
+Developers are continuously on the lookout for technologies that allow them to rapidly and efficiently construct sophisticated APIs and online applications. FastAPI, a relatively new addition to the Python web framework landscape, has quickly garnered traction due to its speed, simplicity, and developer-friendly features. In this article, we will see the introduction of FastAPI and explain why it has become a popular alternative for developing web applications and APIs. To learn more about API please refer to What is API.
+
+What is FastAPI?
+FastAPI is a modern web framework that is relatively fast and used for building APIs with Python 3.7+ based on standard Python-type hints. FastAPI also assists us in automatically producing documentation for our web service so that other developers can quickly understand how to use it. This documentation simplifies testing web service to understand what data it requires and what it offers. FastAPI has many features like it offers significant speed for development and also reduces human errors in the code. It is easy to learn and is completely production-ready. FastAPI is fully compatible with well-known standards of APIs (i.e. OpenAPI and JSON schema).
+
+Features of FastAPI
+Automatic Documentation: FastAPI generates interactive API documentation automatically using the OpenAPI standard. You can access this documentation by visiting a specific endpoint in your application, which makes it incredibly easy to understand and test your API without having to write extensive documentation manually.
+Python Type Hints: One of FastAPI’s standout features is its use of Python-type hints. By annotating function parameters and return types with type hints, you not only improve code readability but also enable FastAPI to automatically validate incoming data and generate accurate API documentation. This feature makes your code less error-prone and more self-documenting.
+Data Validation: FastAPI uses Pydantic models for data validation. You can define your data models using Pydantic’s schema and validation capabilities. This ensures incoming data is automatically validated, serialized, and deserialized, reducing the risk of handling invalid data in your application.
+Asynchronous Support: With the rise of asynchronous programming in Python, FastAPI fully embraces asynchronous operations. You can use Python’s async and await keywords to write asynchronous endpoints, making it well-suited for handling I/O-bound tasks and improving the overall responsiveness of your application.
+Dependency Injection: FastAPI supports dependency injection, allowing you to declare dependencies for your endpoints. This helps in keeping your code modular, testable, and maintainable. You can seamlessly inject dependencies like database connections, authentication, and more into your routes.
+Security Features: FastAPI includes various security features out of the box, such as support for OAuth2, JWT (JSON Web Tokens), and automatic validation of request data to prevent common security vulnerabilities like SQL injection and cross-site scripting (XSS) attacks.
+Installation and Setup of FastAPI
+To get started with FastAPI, you need to install Python, if not then install Python3. Then, you need to install fast API using the following command
+
+pip install fastapi
+You also need to install uvicorn
+
+pip install uvicorn
+Create a Simple API
+Here, we are creating a simple web service that says “Hello” when you visit a specific web address. With FastAPI, you can do this in just a few lines of code, To run this code, you can save it in a Python file, here we are saving the file as main.py.
+
+
+
+
+from fastapi import FastAPI
+ 
+# Create a FastAPI application
+app = FastAPI()
+ 
+# Define a route at the root web address ("/")
+@app.get("/")
+def read_root():
+    return {"message": "Hello, FastAPI!"}
+Now, execute the following command in your terminal:
+
+uvicorn main:app --reload
+Once the application is running, open your web browser and navigate to
+
+http://localhost:8000/
+You should see a message displayed in your browser or the response if you are using an API testing tool like curl or Postman.
+
+{"message": "Hello, FastAPI!"}
+Advantage of FastAPI
+Here are simple advantages of using FastAPI:
+
+Easy to Learn and Use: FastAPI is designed to be straightforward, especially for Python developers. Its simple and intuitive syntax, along with automatic documentation generation, makes it easy to get started and maintain.
+High Performance: FastAPI is built for speed. It’s one of the fastest Python web frameworks available, thanks to its asynchronous support and efficient data handling. This means your web applications can handle a large number of requests without slowing down.
+Automatic Data Validation: With FastAPI, you can use Python type hints to define the data structure you expect for your API requests and responses. FastAPI automatically validates the data, reducing the chances of errors caused by incorrect input.
+Authentication and Authorization: It provides simple ways to handle authentication and authorization, whether using OAuth2, JWT tokens, or custom methods.
+Middleware: We can easily add middleware to your FastAPI application for tasks like logging, authentication, or request/response modification.
+Disadvantage of FastAPI
+Here are some potential disadvantages of using FastAPI:
+
+Learning Curve: While FastAPI is designed to be developer-friendly, it may still have a learning curve for those new to asynchronous programming or web frameworks in general. Developers with no prior experience in Python may also need to learn Python first.
+Community and Documentation: Although FastAPI’s community is growing rapidly, it may not have as extensive a support network or documentation as some other frameworks. You may encounter fewer tutorials, guides, and community-contributed packages.
