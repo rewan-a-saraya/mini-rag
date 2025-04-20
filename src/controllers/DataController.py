@@ -48,12 +48,24 @@ class DataController(BaseController):
 
 
 
+    #def get_clean_file_name(self, orig_file_name: str):
+
+        #base_name, ext = os.path.splitext(orig_file_name.strip())
+
+        #cleaned_file_name = re.sub(r'[^\w]', '', orig_file_name.strip())
+        #cleaned_file_name = cleaned_file_name.replace(" ", "_")
+
+        #return cleaned_file_name
+
     def get_clean_file_name(self, orig_file_name: str):
 
-        cleaned_file_name = re.sub(r'[^\w]', '', orig_file_name.strip())
-        cleaned_file_name = cleaned_file_name.replace(" ", "_")
+        base_name, ext = os.path.splitext(orig_file_name.strip())
 
-        return cleaned_file_name
+        cleaned_base_name = re.sub(r'[^\w]', '', base_name)
+        cleaned_base_name = cleaned_base_name.replace(" ", "_")
+
+        return cleaned_base_name + ext.lower()
+
 
 
 

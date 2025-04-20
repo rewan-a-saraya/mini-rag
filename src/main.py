@@ -8,4 +8,3 @@ app.include_router(data.data_router)
 
 
 # uvicorn src.main:app --reload
-
