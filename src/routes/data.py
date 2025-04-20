@@ -41,7 +41,7 @@ async def upload_data(
     project_dir_path = project_controller.get_project_path(project_id=project_id)
     os.makedirs(project_dir_path, exist_ok=True)
 
-    file_path = controller.generate_unique_filename(
+    file_path, file_id = controller.generate_unique_filepath(
         orig_file_name= file.filename,
         project_id= project_id
     )
@@ -68,7 +68,10 @@ async def upload_data(
 
     return JSONResponse(
         status_code=status.HTTP_200_OK,
-        content={"signal": ResponseSignal.FILE_UPLOAD_FAILED.value},
+        content={
+            "signal": ResponseSignal.FILE_UPLOAD_FAILED.value,
+            "file_id": file_id
+        },
         media_type="application/json"
     )
 
