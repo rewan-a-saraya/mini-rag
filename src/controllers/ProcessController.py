@@ -1,4 +1,3 @@
-from sqlalchemy.dialects.mysql.mariadb import loader
 from src.controllers.BaseController import BaseController
 from src.controllers.ProjectController import ProjectController
 import os
