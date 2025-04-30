@@ -137,7 +137,6 @@ async def process_endpoint(
         for i , chunk in enumerate(file_chunks)
     ]
 
-
     chunk_model = ChunkModel(
         db_client=request.app.db_client
     )

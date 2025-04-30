@@ -24,3 +24,21 @@ class Project(BaseModel):
     def to_dict(self):
         data = self.model_dump(by_alias=True)
         return data
+
+    @classmethod
+    def get_indexes(cls ):
+        return [
+            {
+                "key":[
+                    ("project_id", 1)
+                ],
+                "name": "project_id_index_1",
+                "unique": True
+            }
+        ]
+
+
+
+
+
+
