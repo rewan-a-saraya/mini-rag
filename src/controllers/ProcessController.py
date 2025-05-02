@@ -1,3 +1,4 @@
+from src.controllers import DataController
 from src.controllers.BaseController import BaseController
 from src.controllers.ProjectController import ProjectController
 import os
@@ -32,8 +33,11 @@ class ProcessController(BaseController):
         return None
 
     def get_file_content(self, file_id: str):
-
         loader = self.get_file_loader(file_id=file_id)
+
+        if loader is None:
+            raise ValueError(f"Unsupported file type for file_id: {file_id}")
+
         return loader.load()
 
     def process_file_content(self, file_content: list, file_id: str,
