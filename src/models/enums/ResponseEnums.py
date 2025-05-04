@@ -9,3 +9,4 @@ class ResponseSignal(str,Enum):
     FILE_VALIDATED_SUCCESS = "file_validated_success"
     PROCESSING_FAILED = "processing_failed"
     PROCESSING_SUCCESS = "processing_success"
+    NO_FILES_ERROR = "not_found_files"
