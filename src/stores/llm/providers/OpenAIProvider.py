@@ -1,6 +1,7 @@
 from ..LLMInterface import LLMInterface
 from src.stores.llm import LLMInterface
 from openai import OpenAI
+import logging
 
 class OpenAIProvider(LLMInterface):
 
@@ -16,3 +17,14 @@ class OpenAIProvider(LLMInterface):
         self.default_generation_max_output_characters = default_generation_max_output_characters
         self.default_generation_temperature = default_generation_temperature
 
+        self.generation_model_id = None
+
+        self.embedding_model_id = None
+        self.embedding_size = None
+
+        self.client = OpenAI(
+            api_key = self.api_key,
+            api_url = self.api_url
+        )
+
+        self.logger = logging.getLogger(__name__)
