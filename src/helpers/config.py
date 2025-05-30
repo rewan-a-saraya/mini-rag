@@ -22,7 +22,7 @@ class Settings(BaseSettings):
     EMBEDDING_BACKEND: str
 
     OPENAI_API_KEY: str = None
-    OPENAI_API_ULR: str = None
+    OPENAI_API_URL: str = None
     COHERE_API_KEY: str = None
 
     GENERATION_MODEL_ID: str = None

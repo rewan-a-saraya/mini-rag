@@ -1,6 +1,5 @@
 from abc import ABC
 from http.client import responses
-
 from ..LLMInterface import LLMInterface
 from src.stores.llm.LLMEnums import CoHereEnums, DocumentTypeEnum
 import cohere
