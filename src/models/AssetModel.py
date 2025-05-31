@@ -1,7 +1,5 @@
 from enum import unique
-
 from numpy.core.records import record
-
 from .BaseDataModel import BaseDataModel
 from .db_schemes import Asset
 from .enums.DataBaseEnum import DataBaseEnum

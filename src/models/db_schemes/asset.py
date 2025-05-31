@@ -35,10 +35,3 @@ class Asset(BaseModel):
                 "unique": True
             }
         ]
-
-
-
-
-
-
-

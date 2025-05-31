@@ -13,14 +13,13 @@ class BaseController:
             "assets/files"
         )
 
+        self.database_dir = os.path.join(
+            self.base_dir,
+            "assets/database"
+        )
+
     def generate_random_string(self, length: int=12):
         return ''.join(random.choices(string.ascii_lowercase + string.digits, k=length))
 
-
-
-
-
-
-
-
-
+    def get_database_path(self, db_name: str):
+        pass

@@ -6,4 +6,3 @@ class BaseDataModel:
         self.db_client = db_client
         self.db = db_client
         self.app_settings = get_settings()
-
