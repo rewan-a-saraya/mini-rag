@@ -5,7 +5,6 @@ import os
 from src.helpers.config import get_settings, Settings
 from src.controllers import DataController
 
-
 class ProjectController(BaseController):
     
     def __init__(self):
@@ -21,4 +20,3 @@ class ProjectController(BaseController):
             os.mkdir(project_dir)
 
         return project_dir
-

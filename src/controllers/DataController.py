@@ -45,7 +45,6 @@ class DataController(BaseController):
             )
         return new_file_path, random_key + "_" + cleaned_file_name
 
-
     def get_clean_file_name(self, orig_file_name: str):
         base_name, ext = os.path.splitext(orig_file_name.strip())
 
@@ -53,11 +52,3 @@ class DataController(BaseController):
         cleaned_base_name = cleaned_base_name.replace(" ", "_")
 
         return cleaned_base_name + ext.lower()
-
-
-
-
-
-
-
-

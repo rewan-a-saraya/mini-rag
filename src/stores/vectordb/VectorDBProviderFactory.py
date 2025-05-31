@@ -9,6 +9,6 @@ class VectorDBProviderFactory:
     def create(self, provider: str):
         if provider == VectorDBEnums.QDRANT.value:
             return QdrantDBProvider (
-                db_path= None,
+                db_path= self.config.VECTOR_DB_PATH,
                 distance_method= None
             )

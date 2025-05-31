@@ -147,8 +147,6 @@ async def process_endpoint(
             asset_record.id: asset_record.asset_name
         }
 
-    #else:
-
 
     project_files =await asset_model.get_all_project_assets(
         asset_project_id= project.id,
@@ -228,6 +226,3 @@ async def process_endpoint(
             "processed_files" : no_files
         }
     )
-
-
-
