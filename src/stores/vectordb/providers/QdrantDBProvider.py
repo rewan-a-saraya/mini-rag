@@ -4,7 +4,7 @@ from ..VectorDBEnums import DistanceMethodEnums
 import logging
 from typing import List
 
-class QdrantDB(VectorDBInterface):
+class QdrantDBProvider(VectorDBInterface):
 
     def __init__(self,db_path: str, distance_method: str):
 
