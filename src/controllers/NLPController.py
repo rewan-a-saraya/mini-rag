@@ -40,7 +40,7 @@ class NLPController(BaseController):
         metadata = [c.chunk_metadata for c in chunks]
 
         vector = [
-            self.embedding_client.embed_text(text=text,
+            self.embedding_client.embed_text(text,
                                              document_type=DocumentTypeEnum.DOCUMENT.value)
             for text in texts
         ]
@@ -63,22 +63,22 @@ class NLPController(BaseController):
 
         return True
 
-    def search_vector_db_collection(self, project: Project, limit: int = 10):
+    def search_vector_db_collection(self, project: Project,text: str, limit: int = 10):
 
         # step 1 : get collection name
         collection_name = self.create_collection_name(project_id=project.project_id)
 
         #step 2 : get text embedding vector
-        vectro = self.embedding_client.embed_text(text=text,
-                                                 document_type=DocumentTypeEnum.QUERY.value)
 
-        if not vectro or len(vectro) == 0:
+        vector = self.embedding_client.embed_text(text, document_type=DocumentTypeEnum.QUERY.value)
+
+        if not vector or len(vector) == 0:
             return False
 
         # step 3 : do semantic search
         results = self.vectordb_client.search_by_vector(
             collection_name=collection_name,
-            vector=vectro,
+            vector=vector,
             limit=limit
         )
 

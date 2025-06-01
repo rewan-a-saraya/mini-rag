@@ -65,7 +65,7 @@ class CoHereProvider(LLMInterface, ABC):
 
         return response.text
 
-    def embed_text(self, text: str, document_type: str = None):
+    def embed_text(self, text_or_texts, document_type: str = None):
 
         if not self.client:
             self.logger.error("CoHere client was not set")
@@ -79,20 +79,32 @@ class CoHereProvider(LLMInterface, ABC):
         if document_type == DocumentTypeEnum.QUERY:
             input_type = CoHereEnums.QUERY
 
+        # Normalize input to list
+        if isinstance(text_or_texts, str):
+            texts = [self.process_text(text_or_texts)]
+            single_input = True
+        elif isinstance(text_or_texts, list):
+            texts = [self.process_text(t) for t in text_or_texts]
+            single_input = False
+        else:
+            self.logger.error("Invalid input type for embed_text. Must be str or list of str.")
+            return None
+
         response = self.client.embed(
             model=self.embedding_model_id,
-            texts=[self.process_text(text)],
+            texts=texts,
             input_type=input_type,
-            #embedding_type=['float'],
+            # embedding_type=['float'],
         )
 
-        if not response or not response.embeddings or not isinstance(response.embeddings[0], list):
-
+        if not response or not response.embeddings or not all(isinstance(e, list) for e in response.embeddings):
             self.logger.error("Error while embedding text with CoHere")
-            return
+            return None
 
-        return response.embeddings[0]
-
+        if single_input:
+            return response.embeddings[0]
+        else:
+            return response.embeddings
 
     def construct_prompt(self, prompt: str, role: str):
         return {
