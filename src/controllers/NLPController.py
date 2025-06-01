@@ -2,6 +2,7 @@ from .BaseController import BaseController
 from src.models.db_schemes import Project, DataChunk
 from src.stores.llm.LLMEnums import DocumentTypeEnum
 from typing import List
+import json
 
 class NLPController(BaseController):
 
@@ -24,7 +25,9 @@ class NLPController(BaseController):
         collection_name = self.create_collection_name(project_id=project.project_id)
         collection_info = self.vectordb_client.get_collection_info(collection_name=collection_name)
 
-        return collection_info
+        return json.loads(
+            json.dumps(collection_info, default=lambda x: x.__dict__)
+        )
 
     def index_into_vector_db(self, project:Project, chunks: List[DataChunk],
                              chunks_ids: list[int], do_reset: bool = False):
@@ -59,3 +62,29 @@ class NLPController(BaseController):
         )
 
         return True
+
+    def search_vector_db_collection(self, project: Project, limit: int = 10):
+
+        # step 1 : get collection name
+        collection_name = self.create_collection_name(project_id=project.project_id)
+
+        #step 2 : get text embedding vector
+        vectro = self.embedding_client.embed_text(text=text,
+                                                 document_type=DocumentTypeEnum.QUERY.value)
+
+        if not vectro or len(vectro) == 0:
+            return False
+
+        # step 3 : do semantic search
+        results = self.vectordb_client.search_by_vector(
+            collection_name=collection_name,
+            vector=vectro,
+            limit=limit
+        )
+
+        if not results:
+            return  False
+
+        return json.loads(
+            json.dumps(results, default=lambda x: x.__dict__)
+        )
