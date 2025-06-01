@@ -1,5 +1,3 @@
-from sqlalchemy.testing.suite.test_reflection import metadata
-
 from .BaseController import BaseController
 from src.models.db_schemes import Project, DataChunk
 from src.stores.llm.LLMEnums import DocumentTypeEnum
@@ -29,7 +27,7 @@ class NLPController(BaseController):
         return collection_info
 
     def index_into_vector_db(self, project:Project, chunks: List[DataChunk],
-                             do_reset: bool = False):
+                             chunks_ids: list[int], do_reset: bool = False):
 
         # step 1 : get collection name
         collection_name = self.create_collection_name(project_id=project.project_id)
@@ -39,7 +37,7 @@ class NLPController(BaseController):
         metadata = [c.chunk_metadata for c in chunks]
 
         vector = [
-            self.embedding_client.embed_text(text=texts,
+            self.embedding_client.embed_text(text=text,
                                              document_type=DocumentTypeEnum.DOCUMENT.value)
             for text in texts
         ]
@@ -57,6 +55,7 @@ class NLPController(BaseController):
             texts=texts,
             metadata=metadata,
             vectors=vector,
+            record_ids=chunks_ids,
         )
 
         return True

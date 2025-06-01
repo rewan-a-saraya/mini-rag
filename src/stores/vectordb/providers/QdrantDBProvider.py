@@ -28,15 +28,18 @@ class QdrantDBProvider(VectorDBInterface):
     def is_collection_existed(self, collection_name: str) -> bool:
         return self.client.collection_exists(collection_name= collection_name)
 
+    #def list_all_collection(self) -> List:
+        #return self.client.get_collection()
+
     def list_all_collection(self) -> List:
-        return self.client.get_collection()
+        return self.client.get_collections().collections
 
     def get_collection_info(self, collection_name: str) -> dict:
         return self.client.get_collection(collection_name= collection_name)
 
     def delete_collection(self, collection_name: str):
         if self.is_collection_existed(collection_name):
-            return self.client.delete_dollection(collection_name= collection_name)
+            return self.client.delete_collection(collection_name= collection_name)
 
     def create_collection(self, collection_name: str,
                           embedding_size: int,
@@ -70,6 +73,7 @@ class QdrantDBProvider(VectorDBInterface):
              collection_name= collection_name,
              records= [
                  models.Record(
+                     id=[record_id],
                      vector= vector,
                      payload= {
                          "text": text,
@@ -92,7 +96,7 @@ class QdrantDBProvider(VectorDBInterface):
             metadata = [None] * len(texts)
 
         if record_ids is None:
-            record_ids = [None] * len(texts)
+            record_ids = list(range(0, len(texts)))
 
         for i in range(0, len(texts), batch_size):
             batch_end = i + batch_size
@@ -100,9 +104,11 @@ class QdrantDBProvider(VectorDBInterface):
             batch_texts = texts[i: batch_end]
             batch_vectors = vectors[i: batch_end]
             batch_metadata = metadata[i: batch_end]
+            batch_record_ids = record_ids[i: batch_end]
 
             batch_records = [
                 models.Record(
+                    id=batch_record_ids[x],
                     vector= batch_vectors[x],
                     payload={
                         "text": batch_texts[x],

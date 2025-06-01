@@ -2,8 +2,7 @@ from ..LLMInterface import LLMInterface
 from src.stores.llm import LLMInterface
 from openai import OpenAI
 import logging
-from src.stores.llm.LLMEnums import OpenAIEnums
-
+from src.stores.llm.LLMInterface import LLMInterface
 class OpenAIProvider(LLMInterface):
 
     def __init__(self, api_key: str, api_url:str = None,
@@ -23,10 +22,7 @@ class OpenAIProvider(LLMInterface):
         self.embedding_model_id = None
         self.embedding_size = None
 
-        self.client = OpenAI(
-            api_key = self.api_key,
-            api_url = self.api_url
-        )
+        self.client = OpenAI(api_key=self.api_key)
 
         self.logger = logging.getLogger(__name__)
 
