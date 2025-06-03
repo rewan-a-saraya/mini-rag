@@ -30,7 +30,7 @@ class NLPController(BaseController):
         )
 
     def index_into_vector_db(self, project:Project, chunks: List[DataChunk],
-                             chunks_ids: list[int], do_reset: bool = False):
+                             chunks_ids: List[int], do_reset: bool = False):
 
         # step 1 : get collection name
         collection_name = self.create_collection_name(project_id=project.project_id)
@@ -87,3 +87,17 @@ class NLPController(BaseController):
 
         return results
 
+    def answer_rag_question(self, project: Project, query: str, limit: int = 10):
+
+        # step 1 : retrieve related documents
+        retrieved_documents = self.search_vector_db_collection(
+            project=project,
+            text=query,
+            limit=limit,
+        )
+
+        if not retrieved_documents or len(retrieved_documents) ==0 :
+            return None
+
+        # step 2 : construct LLM prompt
+        rf
