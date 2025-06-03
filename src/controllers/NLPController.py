@@ -4,7 +4,7 @@ from src.stores.llm.LLMEnums import DocumentTypeEnum
 from typing import List
 import json
 
-from ..stores.llm.templates.locales.arabic.rag import footer_prompt
+from ..stores.llm.templates.locales.arabic.rag import footer_prompt, system_prompt
 
 
 class NLPController(BaseController):
@@ -94,6 +94,8 @@ class NLPController(BaseController):
 
     def answer_rag_question(self, project: Project, query: str, limit: int = 10):
 
+        answer, full_prompt, chat_history = None, None, None
+
         # step 1 : retrieve related documents
         retrieved_documents = self.search_vector_db_collection(
             project=project,
@@ -102,10 +104,11 @@ class NLPController(BaseController):
         )
 
         if not retrieved_documents or len(retrieved_documents) ==0 :
-            return None
+            return answer, full_prompt, chat_history
 
         # step 2 : construct LLM prompt
-        self.template_parser.get("rag", "system_prompt")
+        #self.template_parser.get("rag", "system_prompt")
+        system_prompt = self.template_parser.get("rag", "system_prompt")
 
         document_prompts = "\n".join([
             self.template_parser.get("rag", "document_prompt",{
@@ -116,3 +119,19 @@ class NLPController(BaseController):
         ])
 
         footer_prompt = self.template_parser.get("rag", "footer_prompt")
+
+        chat_history = [
+            self.generation_client.construct_prompt(
+                prompt=system_prompt,
+                role=self.generation_client.enums.SYSTEM.value,
+            )
+        ]
+
+        full_prompt = "\n\n".join([ document_prompts, footer_prompt])
+
+        answer = self.generation_client.generate_text(
+            prompt=full_prompt,
+            chat_history=chat_history
+        )
+
+        return answer, full_prompt, chat_history
