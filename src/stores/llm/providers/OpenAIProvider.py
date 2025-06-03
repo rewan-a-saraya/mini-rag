@@ -1,3 +1,4 @@
+from ..LLMEnums import CoHereEnums, OpenAIEnums
 from ..LLMInterface import LLMInterface
 from src.stores.llm import LLMInterface
 from openai import OpenAI
@@ -23,6 +24,8 @@ class OpenAIProvider(LLMInterface):
         self.embedding_size = None
 
         self.client = OpenAI(api_key=self.api_key)
+
+        self.enums = OpenAIEnums
 
         self.logger = logging.getLogger(__name__)
 
