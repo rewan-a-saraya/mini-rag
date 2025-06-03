@@ -4,14 +4,19 @@ from src.stores.llm.LLMEnums import DocumentTypeEnum
 from typing import List
 import json
 
+from ..stores.llm.templates.locales.arabic.rag import footer_prompt
+
+
 class NLPController(BaseController):
 
-    def __init__(self, vectordb_client, generation_client, embedding_client):
+    def __init__(self, vectordb_client, generation_client,
+                 embedding_client, template_parser):
         super().__init__()
 
         self.vectordb_client = vectordb_client
         self.generation_client = generation_client
         self.embedding_client = embedding_client
+        self.template_parser = template_parser
 
     def create_collection_name(self, project_id: str):
         return f"collection_{project_id}".strip()
@@ -100,4 +105,14 @@ class NLPController(BaseController):
             return None
 
         # step 2 : construct LLM prompt
-        rf
+        self.template_parser.get("rag", "system_prompt")
+
+        document_prompts = "\n".join([
+            self.template_parser.get("rag", "document_prompt",{
+                "doc_num": idx + 1,
+                "chunk_text": doc.text,
+            })
+            for idx, doc in enumerate(retrieved_documents)
+        ])
+
+        footer_prompt = self.template_parser.get("rag", "footer_prompt")
