@@ -13,10 +13,13 @@ This is a minimal implementation of the RAG model for question answering
    ```bash
    $  conda create -n mini-rag python=3.8
    ```
-4) Activate the environment :
+3) Activate the environment :
    ```bash
    $  conda activate mini-rag
    ```
+
+### (Optional) Run Ollama Local LLM Server using Colab + Ngrok
+- Check the https://colab.research.google.com/drive/1MvOXu4vEWZ6XJq0C2xkBy4eLhzvpnJx2#scrollTo=BrhlgM9KbCiE
 
 ## Installation
 
