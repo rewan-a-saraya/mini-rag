@@ -29,6 +29,7 @@ footer_prompt_fr = Template(
         "En vous basant uniquement sur les documents ci-dessus, veuillez générer une réponse pour l'utilisateur.",
         "## Question :",
         "$query",
+        "",
         "## Réponse :",
     ])
 )

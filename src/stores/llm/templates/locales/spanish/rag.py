@@ -29,6 +29,7 @@ footer_prompt_es = Template(
         "Basándote únicamente en los documentos anteriores, por favor genera una respuesta para el usuario.",
         "## Pregunta:",
         "$query",
+        "",
         "## Respuesta:",
     ])
 )
