@@ -4,7 +4,7 @@ from string import Template
 
 #### النظام ####
 
-system_prompt_ar = "\n".join([
+system_prompt = "\n".join([
     "أنت مساعد لإنشاء رد على استفسار المستخدم.",
     "سيتم تزويدك بمجموعة من المستندات المرتبطة باستفسار المستخدم.",
     "يجب عليك إنشاء رد بناءً على المستندات المقدمة.",
@@ -16,7 +16,7 @@ system_prompt_ar = "\n".join([
 ])
 
 #### المستندات ####
-document_prompt_ar = Template(
+document_prompt = Template(
     "\n".join([
         "## المستند رقم: $doc_num",
         "### المحتوى: $chunk_text",
@@ -24,7 +24,7 @@ document_prompt_ar = Template(
 )
 
 #### التذييل ####
-footer_prompt_ar = Template(
+footer_prompt = Template(
     "\n".join([
         "استنادًا فقط إلى المستندات أعلاه، يرجى إنشاء إجابة للمستخدم.",
         "## السؤال:",

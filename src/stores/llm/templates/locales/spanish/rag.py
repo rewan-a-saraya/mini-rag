@@ -4,7 +4,7 @@ from string import Template
 
 #### Sistema ####
 
-system_prompt_es = "\n".join([
+system_prompt = "\n".join([
     "Eres un asistente para generar una respuesta al usuario.",
     "Se te proporcionará un conjunto de documentos relacionados con la consulta del usuario.",
     "Debes generar una respuesta basada en los documentos proporcionados.",
@@ -16,7 +16,7 @@ system_prompt_es = "\n".join([
 ])
 
 #### Documentos ####
-document_prompt_es = Template(
+document_prompt = Template(
     "\n".join([
         "## Documento No: $doc_num",
         "### Contenido: $chunk_text",
@@ -24,7 +24,7 @@ document_prompt_es = Template(
 )
 
 #### Pie de página ####
-footer_prompt_es = Template(
+footer_prompt = Template(
     "\n".join([
         "Basándote únicamente en los documentos anteriores, por favor genera una respuesta para el usuario.",
         "## Pregunta:",
