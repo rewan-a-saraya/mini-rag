@@ -1,0 +1,15 @@
+fastapi==0.115.12
+uvicorn[standard]==0.23.2
+python-multipart==0.0.20
+python-dotenv==1.0.1
+pydantic-settings==2.8.1
+aiofile==3.9.0
+langchain-core==0.3.54
+PyMuPDF==1.25.5
+motor==3.7.0
+openai==1.77.0
+cohere==5.15.0
+qdrant-client==1.10.1
+
+
+#pip install -r ./src/requirements.txt
